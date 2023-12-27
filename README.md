@@ -1,1 +1,1 @@
-# robotic_arm_kinematics
+# Robotic Arm Kinematics

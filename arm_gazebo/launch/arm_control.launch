@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+      <!-- Launch file parameters -->
+      <arg name="debug" default="true" />
+
+      <arg if = "$(arg debug)"  name="DEBUG" value="screen"/>
+      <arg unless = "$(arg debug)"  name="DEBUG" value="log"/>
+
+      <!-- Controllers config -->
+      <rosparam file="$(find arm_gazebo)/config/kr210_controllers.yaml" command="load" />
+
+      <!-- Load controllers -->                 
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+            output="$(arg DEBUG)"
+            ns="/kuka_arm"
+            args="joint_state_controller 
+                  arm_controller
+                  gripper_controller"/>
+
+</launch>
