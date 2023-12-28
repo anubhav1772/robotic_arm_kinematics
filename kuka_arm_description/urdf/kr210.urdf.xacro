@@ -2,7 +2,6 @@
 <robot name="kuka_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!--Define constants-->
-  <xacro:property name="pi" value="3.141592654"/>
   <xacro:property name="deg" value="0.017453293"/><!--degrees to radians-->
   <xacro:property name="mass0" value="150" />
   <xacro:property name="mass1" value="138" />
