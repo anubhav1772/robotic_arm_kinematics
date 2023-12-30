@@ -2,7 +2,7 @@
 <launch>
       <!-- Export env variable so that gazebo finds our models -->
       <env  name="GAZEBO_MODEL_PATH"
-            value="$(find arm_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+            value="$(find kuka_arm_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
 
       <!-- Launch file parameters -->
       <arg  name="paused" default="false" />
@@ -15,7 +15,7 @@
       <arg	name="world_pose" default="-x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
 	<!-- Unpause the simulation after loading the robot model -->
   	<arg	name="unpause"	value="$(eval '' if arg('paused') else '-unpause')" />
-      <arg name="world_name" default="$(find arm_gazebo)/worlds/cafe.world" /> 
+      <arg name="world_name" default="$(find kuka_arm_gazebo)/worlds/cafe.world" /> 
 
       <!-- Start up simulated world -->
       <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -28,7 +28,7 @@
       </include>
 
       <!-- Send robot urdf to param server -->
-      <include file="$(find arm_gazebo)/launch/arm_description.launch" />
+      <include file="$(find kuka_arm_gazebo)/launch/arm_description.launch" />
 
       <node name="spawn_gazebo_model" 
             pkg="gazebo_ros" 
@@ -38,8 +38,8 @@
             args="-param robot_description -urdf -model kuka_arm"/> 
 
       <!-- Start controllers  -->
-      <include file="$(find arm_gazebo)/launch/arm_control.launch" />
+      <include file="$(find kuka_arm_gazebo)/launch/arm_control.launch" />
 
       <!--<rosparam
-      file="$(find arm_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>-->
+      file="$(find kuka_arm_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>-->
 </launch>
