@@ -14,7 +14,7 @@
             output="$(arg DEBUG)"
             ns="/kuka_arm"
             args="joint_state_controller 
-                  arm_controller
+                  arm_manipulator_controller
                   gripper_controller"/>
 
 </launch>
