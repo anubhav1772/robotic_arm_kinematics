@@ -40,6 +40,5 @@
       <!-- Start controllers  -->
       <include file="$(find kuka_arm_gazebo)/launch/arm_control.launch" />
 
-      <!--<rosparam
-      file="$(find kuka_arm_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>-->
+      <!--<rosparam file="$(find kuka_arm_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>-->
 </launch>
