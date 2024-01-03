@@ -11,8 +11,8 @@
       <arg  name="gui" default="true" />
       <arg  name="use_sim_time" default="true" />
       <arg  name="limited" default="false" />
-      <!-- world_pose working -->
-      <arg	name="world_pose" default="-x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
+      <!-- Arm position in the world -->
+      <arg	name="world_pose" default="-x 0 -y 0 -z 0.2 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
 	<!-- Unpause the simulation after loading the robot model -->
   	<arg	name="unpause"	value="$(eval '' if arg('paused') else '-unpause')" />
       <arg name="world_name" default="$(find kuka_arm_gazebo)/worlds/cafe.world" /> 
@@ -35,7 +35,7 @@
             type="spawn_model" 
             respawn="false"
             output="screen"
-            args="-param robot_description -urdf -model kuka_arm"/> 
+            args="-param robot_description $(arg world_pose) -urdf -model kuka_arm"/> 
 
       <!-- Start controllers  -->
       <include file="$(find kuka_arm_gazebo)/launch/arm_control.launch" />
