@@ -3,7 +3,7 @@
 	<!-- By default, we are not in debug mode -->
   	<arg	name="debug"	default="false" />
   	<arg	name="rviz_config"	default="true"	doc=""/>
-	<arg 	name="use_gui" default="false" /> 
+	<arg 	name="use_gui" default="true" /> 
 	<arg	name="load_robot_description"	default="true" />
 	
 	<!-- We do not have a robot connected, so publish fake joint states -->
@@ -12,10 +12,12 @@
 		 Gazebo provides its own plugin called "gazebo_ros_control" 
 		 that automatically publishes joint states to the ROS system.-->
 	<!-- https://answers.ros.org/question/252114/failed-to-validate-trajectory-couldnt-receive-full-current-joint-state-within-1s-error/ -->
-	<!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+	<!--
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
 		<param name="use_gui" value="$(arg use_gui)"/>
-		<rosparam param="source_list">["/joint_states"]</rosparam>
-	</node>-->
+		<rosparam param="source_list">["/kuka_arm/joint_states"]</rosparam>
+	</node>
+	-->
 
 	<!-- Given the published joint states, publish tf for the robot links -->
 	<node	name="robot_state_publisher"				
