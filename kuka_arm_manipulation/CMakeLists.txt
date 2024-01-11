@@ -8,10 +8,23 @@ add_compile_options(-std=c++14)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  std_msgs
+  actionlib
+  control_msgs
+  sensor_msgs
+  trajectory_msgs
+  moveit_core
+  moveit_ros_planning
+  moveit_ros_planning_interface
+  geometric_shapes
+  moveit_visual_tools
+  rviz_visual_tools
+  message_generation
+  tf2_ros
+  tf2
 )
-
+find_package(Boost REQUIRED)
 find_package(Eigen3 3.4 REQUIRED)
+
 # catkin_python_setup()
 
 ################################################
@@ -40,30 +53,11 @@ find_package(Eigen3 3.4 REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
-
-################################################
-## Declare ROS dynamic reconfigure parameters ##
-################################################
-
-## To declare and build dynamic reconfigure parameters within this
-## package, follow these steps:
-## * In the file package.xml:
-##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
-## * In this file (CMakeLists.txt):
-##   * add "dynamic_reconfigure" to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * uncomment the "generate_dynamic_reconfigure_options" section below
-##     and list every .cfg file to be processed
-
-## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  trajectory_msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -74,10 +68,11 @@ find_package(Eigen3 3.4 REQUIRED)
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES kuka_arm_manipulation
-   CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -95,17 +90,19 @@ include_directories(
 include_directories(${EIGEN_INCLUDE_DIRS})
 link_directories(${Eigen_INCLUDE_DIRS})
 
-## Declare a C++ library
-#add_library(${PROJECT_NAME}
-#  src/${PROJECT_NAME}/HomoTransMat.cpp
-#)
-
 ## Declare a C++ executable
 add_executable(trans_mat src/HomoTransMat.cpp)
+add_executable(arm_traj_sampler src/arm_motion.cpp)
+add_executable(robot_model_interface_node src/robot_model_interface.cpp)
 
 ## Add cmake target dependencies of the library
 add_dependencies(trans_mat ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(arm_traj_sampler ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(robot_model_interface_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(trans_mat ${catkin_LIBRARIES} Eigen3::Eigen)
+target_link_libraries(arm_traj_sampler ${catkin_LIBRARIES})
+target_link_libraries(robot_model_interface_node ${catkin_LIBRARIES})
+
 
