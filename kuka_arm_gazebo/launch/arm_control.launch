@@ -7,12 +7,15 @@
       <arg unless = "$(arg debug)"  name="DEBUG" value="log"/>
 
       <!-- Controllers config -->
-      <rosparam file="$(find kuka_arm_gazebo)/config/kr210_controllers.yaml" command="load" />
+      <rosparam   file="$(find kuka_arm_gazebo)/config/kr210_controllers.yaml" 
+                  command="load" />
 
       <!-- Load controllers -->                 
-      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+      <node name="controller_spawner" 
+            pkg="controller_manager" 
+            type="spawner" 
+            respawn="false"
             output="$(arg DEBUG)"
-            ns="/kuka_arm"
             args="joint_state_controller 
                   arm_manipulator_controller
                   gripper_controller"/>
