@@ -12,14 +12,14 @@
       <arg  name="use_sim_time" default="true" />
       <arg  name="limited" default="false" />
       <!-- Arm position in the world -->
-      <arg	name="world_pose" default="-x 0 -y 0 -z 0.2 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
+      <arg	name="world_pose" default="-x 0 -y 0 -z 0.0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
 	<!-- Unpause the simulation after loading the robot model -->
   	<arg	name="unpause"	value="$(eval '' if arg('paused') else '-unpause')" />
       <arg name="world_name" default="$(find kuka_arm_gazebo)/worlds/cafe.world" /> 
 
       <!-- Start up simulated world -->
       <include file="$(find gazebo_ros)/launch/empty_world.launch">
-            <arg name="world_name" value="$(arg world_name)" />
+            <!--<arg name="world_name" value="$(arg world_name)" />-->
             <arg name="use_sim_time" value="$(arg use_sim_time)" />
             <arg name="paused" value="$(arg paused)" />
             <arg name="debug" value="$(arg debug)" />
