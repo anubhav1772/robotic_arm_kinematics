@@ -25,7 +25,7 @@
 			type="robot_state_publisher" 
 			respawn="true" 
 			output="screen">
-		<remap from="joint_states" to="/kuka_arm/joint_states"/>
+		<!--<remap from="joint_states" to="/kuka_arm/joint_states"/>-->
 	</node>
 
     <!-- http://wiki.ros.org/tf -->
