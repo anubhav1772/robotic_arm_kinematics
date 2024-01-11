@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   
-  <param name="robot_description" command="$(find xacro)/xacro '$(find kuka_arm_description)/urdf/kr210.urdf.xacro'" />
+  <param  name="robot_description" 
+          command="$(find xacro)/xacro '$(find kuka_arm_description)/urdf/kr210.urdf.xacro'" />
 
 </launch>
