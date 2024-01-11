@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "trans_mat");
     ros::NodeHandle nh;
 
-    Matrix4d T0_7, T0_1, T1_2, T2_3, T3_4, T4_5, T5_6, T6_7;
+    Matrix4d T0_7, T0_1, T1_2, T2_3, T3_4, T4_5, T5_6, T6_7, T_Z180, T_Y90;
     double theta1, theta2, theta3, theta4, theta5, theta6;
 
     theta1 = 0;
@@ -61,6 +61,17 @@ int main(int argc, char **argv)
     T0_7 = T0_1*T1_2*T2_3*T3_4*T4_5*T5_6*T6_7;
     
     cout << T0_7 << endl;
+
+    T_Z180 << -1, 0, 0, 0,
+                0, -1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1;
+    T_Y90 << 0, 0, -1, 0,
+                0, 1, 0, 0,
+                1, 0, 0, 0,
+                0, 0, 0, 1;
+
+    cout << T0_7*T_Z180*T_Y90 << endl;
     
     return 0;
 }
