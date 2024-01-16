@@ -62,6 +62,9 @@ int main(int argc, char **argv)
     
     cout << T0_7 << endl;
 
+    // Intrinsic rotations (pre-multiply)
+    // 1. Rotation by 180 deg about Z-axis
+    // 2. Rotation by -90 deg about Y-axis
     T_Z180 << -1, 0, 0, 0,
                 0, -1, 0, 0,
                 0, 0, 1, 0,
@@ -71,7 +74,7 @@ int main(int argc, char **argv)
                 1, 0, 0, 0,
                 0, 0, 0, 1;
 
-    cout << T0_7*T_Z180*T_Y90 << endl;
+    cout << T_Y90*T_Z180*T0_7 << endl;
     
     return 0;
 }
