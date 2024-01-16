@@ -25,13 +25,13 @@ ArmMotion::ArmMotion(ros::NodeHandle nh)
     moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
     geometry_msgs::Pose target_pose;
 
-    target_pose.orientation.w = 0.4947743972838332;
-    target_pose.orientation.x = -0.4952133362195981;
-    target_pose.orientation.y = 0.5001244266339454;
-    target_pose.orientation.z = -0.5097426853881694;
-    target_pose.position.x = 0.61245;
-    target_pose.position.y = -0.01091;
-    target_pose.position.z = 1.43022;
+    target_pose.orientation.w = 0.23174434479718986;
+    target_pose.orientation.x = -0.9147616019070253;
+    target_pose.orientation.y = -0.24637891586356353;
+    target_pose.orientation.z = 0.22091446342172652;
+    target_pose.position.x = 0.40510272080090204;
+    target_pose.position.y = -1.1366917585754954;
+    target_pose.position.z = 0.3751738609956329;
 
     // set starting pose
     arm_move_group.setStartStateToCurrentState();
@@ -39,11 +39,11 @@ ArmMotion::ArmMotion(ros::NodeHandle nh)
     arm_move_group.setPoseTarget(target_pose);
 
     // slow down movement of the arm
-    arm_move_group.setMaxVelocityScalingFactor(0.2);
+    arm_move_group.setMaxVelocityScalingFactor(0.25);
     gripper_move_group.setMaxVelocityScalingFactor(1.0);
 
     // 5 cm (0.05m)
-    arm_move_group.setGoalTolerance(0.05);
+    // arm_move_group.setGoalTolerance(0.05);
     
     bool success = static_cast<bool>(arm_move_group.plan(arm_plan));
     ROS_INFO("Plan to target: %s", success ? "SUCCEEDED" : "FAILED");
